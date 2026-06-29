@@ -196,10 +196,15 @@ body {
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
+  font-family: inherit;
   text-decoration: none;
   border: none;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.print-only {
+  display: none;
 }
 
 .btn-primary {
@@ -770,5 +775,305 @@ body {
 
   .timeline::before {
     left: 5px;
+  }
+}
+
+/* ============================================
+   PRINT  (renders the page as a tight résumé)
+   ============================================ */
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.4in;
+  }
+
+  html, body {
+    background: #fff !important;
+  }
+
+  body {
+    color: #1a2233;
+    font-size: 10pt;
+    line-height: 1.35;
+  }
+
+  /* Hide interactive / decorative chrome */
+  .nav,
+  .nav-toggle,
+  .hero-actions,
+  .hero-meta,
+  .hero-image-wrap,
+  .hero-bg-glow,
+  .hero-image-glow,
+  .contact-actions,
+  .footer,
+  .skill-card-icon,
+  .edu-icon,
+  .timeline-dot,
+  #contact {
+    display: none !important;
+  }
+
+  .timeline::before {
+    display: none !important;
+  }
+
+  /* Show print-only content */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Force scroll-reveal items visible */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Reset layout containers */
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  .hero {
+    min-height: 0;
+    display: block;
+    padding: 0 0 6px;
+    overflow: visible;
+  }
+
+  .hero-content {
+    display: block;
+    gap: 0;
+  }
+
+  .section {
+    padding: 7px 0 0;
+  }
+
+  /* Header block */
+  .hero h1 {
+    font-size: 22pt;
+    letter-spacing: -0.5px;
+    margin-bottom: 1px;
+    color: #111827;
+  }
+
+  .hero h1 .accent { color: #111827; }
+
+  .hero-title {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #0a6db5;
+    margin-bottom: 4px;
+  }
+
+  .print-contact {
+    font-size: 9pt;
+    color: #475569;
+    margin-bottom: 6px;
+  }
+
+  .hero-bio {
+    font-size: 9.5pt;
+    color: #3d4757;
+    max-width: none;
+    margin: 0 0 4px;
+    line-height: 1.45;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: 12pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0a6db5;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 3px;
+    margin-bottom: 7px;
+  }
+
+  .section-title .accent { color: #0a6db5; }
+
+  /* Skills */
+  .skills-grid {
+    display: block;
+  }
+
+  .skill-card,
+  .skill-card-featured {
+    background: none !important;
+    border: none !important;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 4px;
+    box-shadow: none !important;
+  }
+
+  .skill-card h3,
+  .skill-card-featured h3 {
+    display: inline;
+    font-size: 9.5pt;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #1a2233;
+  }
+
+  .skill-card h3::after {
+    content: ': ';
+  }
+
+  .skill-card-featured h3::after {
+    content: ' \2014 ';
+  }
+
+  .skill-card-lead {
+    display: inline;
+    font-size: 9.5pt;
+    color: #3d4757;
+    margin: 0;
+  }
+
+  .tags,
+  .tags.compact {
+    display: inline;
+  }
+
+  .tag {
+    display: inline;
+    background: none !important;
+    border: none !important;
+    color: #3d4757 !important;
+    padding: 0;
+    font-size: 9.5pt;
+    white-space: normal;
+  }
+
+  .tag:not(:last-child)::after {
+    content: ', ';
+  }
+
+  /* Experience timeline -> plain blocks */
+  .timeline {
+    padding-left: 0;
+  }
+
+  .timeline-item {
+    margin-bottom: 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .timeline-card {
+    background: none !important;
+    border: none !important;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none !important;
+  }
+
+  .timeline-header {
+    margin-bottom: 3px;
+    gap: 8px;
+  }
+
+  .timeline-header h3 {
+    font-size: 10.5pt;
+    color: #1a2233;
+  }
+
+  .role-level {
+    background: none;
+    border: none;
+    color: #5a6678;
+    padding: 0;
+    font-size: 8pt;
+  }
+
+  .company {
+    font-size: 10pt;
+    color: #0a6db5;
+  }
+
+  .date {
+    font-size: 9pt;
+    color: #5a6678;
+  }
+
+  .location {
+    font-size: 8.5pt;
+    color: #5a6678;
+    margin-top: 0;
+  }
+
+  .timeline-bullets {
+    margin-bottom: 2px;
+  }
+
+  .timeline-bullets li {
+    font-size: 9.5pt;
+    color: #3d4757;
+    margin-bottom: 2px;
+    line-height: 1.4;
+    padding-left: 13px;
+  }
+
+  .timeline-bullets li::before {
+    content: '\2022';
+    color: #0a6db5;
+    line-height: 1.5;
+  }
+
+  /* Hide per-job tag rows in print to keep it tight */
+  .timeline-card .tags.compact {
+    display: none !important;
+  }
+
+  /* Education */
+  .edu-grid {
+    display: block;
+  }
+
+  .edu-card {
+    background: none !important;
+    border: none !important;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 3px;
+  }
+
+  .edu-card h3 {
+    display: inline;
+    font-size: 9.5pt;
+    color: #1a2233;
+  }
+
+  .edu-card h3::after {
+    content: ' \2014 ';
+    color: #5a6678;
+  }
+
+  .edu-card p {
+    display: inline;
+    font-size: 9.5pt;
+    color: #3d4757;
+  }
+
+  .edu-year {
+    display: inline;
+    font-size: 9pt;
+    color: #5a6678;
+  }
+
+  .edu-year::before {
+    content: '  ·  ';
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
   }
 }
